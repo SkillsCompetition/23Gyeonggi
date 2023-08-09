@@ -583,6 +583,7 @@ h1.page_title{
   flex-direction: column;
   border-radius: 5px;
   overflow: hidden;
+  transition: .2s;
 }
 
 .attraction2 .item img,
@@ -615,6 +616,11 @@ h1.page_title{
   font-size: 15px;
   color: gray;
   font-family: "Miscrosoft Phangspa";
+}
+
+.attraction2 .item:hover,
+.special .item:hover{
+  rotate: -3deg;
 }
 
 /* 인풋 */
