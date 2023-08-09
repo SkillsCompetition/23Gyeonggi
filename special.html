@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="resources/icons/fontawesome-free-6.4.0-web/css/all.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>                    
+
+  <input type="checkbox" name="menu" id="menu" hidden>
+  <label for="menu" class="menu_btn"><i class="fa fa-bars"></i></label>
+  <div class="menu_nav">
+    <label for="menu"></label>
+    <div class="side_box col-flex jcsb">
+      <div class="top col-flex aife">
+        <label for="menu" class="close"><i class="fa fa-times"></i></label>
+        <div class="menu">
+          <a href="index.html" class="depth1">천안명물명소</a>
+          <a href="ranking.html" class="depth1">랭킹</a>
+          <div class="depth_box">
+            <a href="#" class="depth1">정보</a>
+            <div class="submenu">
+              <a href="special.html" class="depth2">명물</a>
+              <a href="attraction.html" class="depth2">명소</a>
+            </div>
+          </div>
+          <div class="depth_box">
+            <a href="#" class="depth1">API</a>
+            <div class="submenu">
+              <a href="#" class="depth2">매뉴얼</a>
+              <a href="#" class="depth2">발급</a>
+              <a href="#" class="depth2">관리자</a>
+            </div>
+          </div>
+          <a href="#" class="depth1">로그인</a>
+          <a href="#" class="depth1">회원가입</a>
+        </div>
+      </div>
+
+      <div class="bottom col-flex">
+        <div class="sns_box flex">
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-twitter"></i>
+        </div>
+        <div class="flex jcsb aic">
+          <p>(31162) 충남 천안시 서북구 번영로 156</p>
+          <p>031-1234-4321</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="root">
+
+    <h1 class="page_title">명물 페이지</h1>
+    
+    <!-- 콘텐츠 -->
+    <div class="content">
+      
+      <div class="special_section">
+        <div class="wrap">
+          <div class="title">
+            <h1>명물</h1>
+            <div class="line"></div>
+            <p>천안의 맛있는 명물들입니다.</p>
+          </div>
+
+          <div class="special">
+            <div class="top">
+              <div class="btn_box">
+                <div class="input_box">
+                  <label for="filter">검색필터</label>
+                  <select name="filter" id="filter">
+                    <option value="location">행정구역</option>
+                    <option value="name">이름</option>
+                    <option value="address">주소</option>
+                  </select>
+                </div>
+                <div class="btn">검색</div>
+              </div>
+            </div>
+
+            <div class="container">
+
+              <div class="item">
+                <img src="resources/img/special/1.jpg" alt="">
+                <div class="text_box">
+                  <div class="top flex jcsb aic">
+                    <h2>청화집</h2>
+                    <p><i class="fa fa-star"></i> 4.3</p>
+                  </div>
+
+                  <div class="bottom flex jcsb aic">
+                    <p>충청남도 천안시 동남구 병천면 충절로 1749</p>
+                    <p>041-564-1558</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <img src="resources/img/special/2.jpg" alt="">
+                <div class="text_box">
+                  <div class="top flex jcsb aic">
+                    <h2>동순원</h2>
+                    <p><i class="fa fa-star"></i> 4.3</p>
+                  </div>
+
+                  <div class="bottom flex jcsb aic">
+                    <p>충청남도 천안시 서북구 성환읍</p>
+                    <p>041-564-1558</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <img src="resources/img/special/3.jpg" alt="">
+                <div class="text_box">
+                  <div class="top flex jcsb aic">
+                    <h2>장칼국수</h2>
+                    <p><i class="fa fa-star"></i> 4.2</p>
+                  </div>
+
+                  <div class="bottom flex jcsb aic">
+                    <p>충청남도 천안시 동남구 천안천8길 49</p>
+                    <p>041-555-3567</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <img src="resources/img/special/4.jpg" alt="">
+                <div class="text_box">
+                  <div class="top flex jcsb aic">
+                    <h2>이고집만두</h2>
+                    <p><i class="fa fa-star"></i> 4.0</p>
+                  </div>
+
+                  <div class="bottom flex jcsb aic">
+                    <p>충청남도 천안시 동남구 태조산길 258</p>
+                    <p>041-567-2027</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <img src="resources/img/special/5.jpg" alt="">
+                <div class="text_box">
+                  <div class="top flex jcsb aic">
+                    <h2>일이이사</h2>
+                    <p><i class="fa fa-star"></i> 4.0</p>
+                  </div>
+
+                  <div class="bottom flex jcsb aic">
+                    <p>충청남도 천안시 서북구 불당28길 10</p>
+                    <p>041-558-1224</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="item">
+                <img src="resources/img/special/6.jpg" alt="">
+                <div class="text_box">
+                  <div class="top flex jcsb aic">
+                    <h2>광명만두</h2>
+                    <p><i class="fa fa-star"></i> 3.9</p>
+                  </div>
+
+                  <div class="bottom flex jcsb aic">
+                    <p>충청남도 천안시 서북구 두정중4길 1</p>
+                    <p>041-552-2289</p>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  
+    <footer class="main">
+      <div class="wrap col-flex">
+        <div class="flex jcsb aic">
+          <div class="footer_menu flex">
+            <a href="#">개인정보처리방침</a>
+            <a href="#">고객센터</a>
+            <a href="#">회사소개</a>
+          </div>
+
+          <div class="sns_box flex">
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-twitter"></i>
+          </div>
+        </div>
+        <div class="flex jcsb aic">
+          <p>(31162) 충남 천안시 서북구 번영로 156</p>
+          <p>Copyrightⓒ Cheonan-Si. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+  
+</body>
+</html>
