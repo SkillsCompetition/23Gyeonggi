@@ -1,0 +1,664 @@
+@font-face {
+  font-family: "NOTO";
+  src: url("resources/fonts/NotoSansCJKkr-hinted/NotoSansCJKkr-Bold.otf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "NOTO";
+  src: url("resources/fonts/NotoSansCJKkr-hinted/NotoSansCJKkr-Medium.otf");
+  font-weight: normal;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  letter-spacing: -1px;
+  box-sizing: border-box;
+  word-break: keep-all;
+  font-family: "NOTO";
+}
+
+body{
+  height: 100vh;
+  overflow-x: hidden;
+  background-color: #161612;
+  color: #fff;
+}
+
+.flex{display: flex;}
+.col-flex{display: flex; flex-direction: column;}
+
+.jcc{justify-content: center;}
+.jcsb{justify-content: space-between;}
+.jcfs{justify-content: flex-start;}
+.jcfe{justify-content: flex-end;}
+
+.aic{align-items: center;}
+.aifs{align-items: flex-start;}
+.aife{align-items: flex-end;}
+
+img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wrap{
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+a{
+  color: #000;
+  text-decoration: none;
+}
+
+.btn{
+  padding: .5rem 1.1rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffb700;
+  color: #222;
+  font-size: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  gap: .5rem;
+}
+
+.btn_box{
+  display: flex;
+  gap: .5rem;
+}
+
+.btn_box.full,
+.btn_box.full .btn{
+  width: 100%;
+}
+
+/* 메뉴 네비게이션 */
+
+.menu_btn{
+  padding: 15px 20px;
+  position: fixed;
+  right: 40px;
+  top: 20px;
+  background-color: #ffb700;
+  border-radius: 5px;
+  z-index: 99;
+  cursor: pointer;
+}
+
+.menu_nav{
+  pointer-events: none;
+}
+
+.menu_nav > label{
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background-color: #0009;
+  transition: .2s;
+  opacity: 0;
+}
+
+.menu_nav > .side_box{
+  width: 500px;
+  height: 100vh;
+  background-color: #161612;
+  position: fixed;
+  top: 0;
+  right: -50%;
+  z-index: 999999;
+  transition: .2s;
+  opacity: 0;
+}
+
+#menu:checked ~ .menu_nav{
+  pointer-events: all;
+}
+
+#menu:checked ~ .menu_nav label{
+  opacity: 1;
+}
+
+#menu:checked ~ .menu_nav > .side_box{
+  opacity: 1;
+  right: 0;
+}
+
+
+.menu_nav .menu{
+  width: 100%;
+}
+
+.depth1, .depth2{
+  height: 60px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  transition: .2s;
+}
+
+.depth2 {
+  height: 40px;
+  padding: 0 60px;
+}
+
+.submenu{
+  max-height: 0;
+  overflow: hidden;
+  transition: .2s;
+}
+
+.menu_nav .top{
+  gap: 1rem;
+}
+
+.menu_nav .top label{
+  font-size: 2rem;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+.menu_nav .bottom{
+  padding: 40px;
+  gap: 1rem;
+}
+
+.menu_nav .bottom p{
+  font-size: 15px;
+  color: gray;
+  font-family: "Microsoft Phangspa";
+}
+
+.menu_nav .bottom .sns_box{
+  gap: 1rem;
+  font-size: 1.3rem;
+}
+
+.menu_nav .bottom .sns_box i:hover{
+  color: #ffb700;
+}
+
+.depth_box:hover .submenu{
+  max-height: 200px;
+}
+
+.depth1:hover,
+.depth_box:hover .depth1{
+  background-color: #ffb700;
+  color: #222;
+}
+
+.depth2:hover{
+  background-color: #ffb7002f;
+}
+
+/* 본문 영역 */
+
+.content > div{
+  padding: 200px 0;
+}
+
+.title{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.title h1{
+  line-height: 1;
+  font-size: 2.5rem;
+  text-shadow: 0 1px #fff;
+}
+
+.title .line{
+  width: 100px;
+  height: 4px;
+  background-color: #ffb700;
+  border-radius: 2px;
+}
+
+.title p{
+  font-family: "Microsoft Phangspa";
+}
+
+/* 패럴렉스 */
+
+#root{
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  perspective: 8px;
+  perspective-origin: 0%;
+}
+
+.parallax{
+  position: absolute;
+  padding: 0;
+}
+
+/* 명소 */
+
+.attraction{
+  display: grid;
+  grid-template-columns: 700px auto;
+  gap: 1rem;
+}
+
+.attraction .img_box{
+  width: 700px;
+  height: 700px;
+  padding: 30px;
+  background-color: #1b1b18;
+  border-radius: 5px;
+}
+
+.attraction .info{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.attraction .info img{
+  border-radius: 5px;
+}
+
+.attraction .info .text_box{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 40px;
+  border-radius: 5px;
+  background-color: #1b1b18;
+}
+
+.attraction .info .text_box .top span,
+.attraction .info .text_box .top i{
+  color: orange;
+  margin-right: .2rem;
+}
+
+.attraction .info .text_box p{
+  font-family: "Microsoft Phangspa";
+  color: #d1d1d1;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.attraction .info .text_box hr{
+  opacity: .2;
+}
+
+.parallax.attr:nth-of-type(1){
+  width: 200px;
+  height: 200px;
+  top: 300px;
+  left: 200px;
+  background-image: url("resources/img/attraction/parallax2.jpg");
+  background-size: cover;
+  transform: translateZ(-2px) scale(1.5);
+  border: 5px solid #ffb700;
+  border-radius: 50%;
+  opacity: .1;
+  z-index: -1;
+}
+
+.parallax.attr:nth-of-type(2){
+  width: 150px;
+  height: 150px;
+  top: 600px;
+  right: -1450px;
+  transform: translateZ(-8px) scale(2);
+  background-image: url("resources/img/attraction/parallax1.jpg");
+  background-size: cover;
+  border: 5px solid #ffb700;
+  border-radius: 50%;
+  opacity: .1;
+  z-index: -1;
+}
+
+/* 배너 */
+
+.banner{
+  width: 100%;
+  height: 103px;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner .container{
+  position: absolute;
+  width: 200%;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  animation: banner 6s infinite;
+}
+
+@keyframes banner {
+  0%,	16.66% {left: 0;}
+  19.99%,	36.65% {left: -20%;}
+  39.98%,	56.64% {left: -40%;}
+  59.97%,	76.63% {left: -60%;}
+  79.96%,	96.62% {left: -80%;}
+  100% {left: -100%;}
+}
+
+.banner .container .item{
+  background-color: #fff;
+}
+
+.banner .container img{
+  object-fit: scale-down;
+  padding: 0 20px;
+  transition: .2s;
+}
+
+.banner .container img:hover{
+  transform: scale(.5);
+}
+
+/* 맛집 영역 */
+
+.foodplace_section{
+  padding-bottom: 120px !important;
+}
+
+.foodplace{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.foodplace .item{
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.foodplace .item img{
+  height: 250px;
+}
+
+.foodplace .item .text_box{
+  background-color: #1b1b18;
+  padding: 40px;
+  gap: 1.5rem;
+  z-index: 10;
+  position: relative;
+}
+
+.foodplace .item .text_box h1{
+  line-height: 1;
+}
+
+.foodplace .item .text_box p{
+  text-align: center;
+  line-height: 1.5;
+  font-family: "Microsoft Phangspa";
+}
+
+.foodplace .item .text_box i{
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  font-size: 8rem;
+  opacity: .03;
+  z-index: -1;
+  rotate: -25deg;
+}
+
+.foodplace .item .text_box > div{
+  gap: .5rem;
+}
+
+.foodplace .item .text_box small{
+  font-size: 15px;
+}
+
+.foodplace .item:nth-child(1) small{color: gold;}
+.foodplace .item:nth-child(2) small{color: silver;}
+.foodplace .item:nth-child(3) small{color: chocolate;}
+.foodplace .item:nth-child(4) small{color: gray;}
+
+.parallax.place{
+  width: 500px;
+  height: 500px;
+  opacity: .1;
+}
+
+.parallax.place .container{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.parallax.place .container div{
+  width: 100%;
+  height: 40px;
+  background-color: #ffb700;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
+  transform: translate(-50%, -50%);
+}
+
+.parallax.place .container div:nth-child(2){
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.parallax.place.type1{
+  top: 2200px;
+  left: 100px;
+  transform: translateZ(-4px) scale(1.2) rotate(20deg);
+}
+
+.parallax.place.type2{
+  top: 2200px;
+  right: -400px;
+  transform: translateZ(-2px) scale(.6) rotate(60deg);
+}
+
+/* 푸터 */
+
+footer.main .wrap{
+  padding: 30px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #1b1b18;
+  gap: 1rem;
+}
+
+footer.main p{
+  font-size: 15px;
+  opacity: .5;
+  font-family: "Microsoft Phangspa";
+}
+
+footer .sns_box{
+  font-size: 1.3rem;
+  gap: 1rem;
+}
+
+footer .sns_box i:hover{
+  color: #ffb700;
+}
+
+footer .footer_menu{
+  gap: 1rem;
+}
+
+footer a{
+  color: white;
+}
+
+/* 서브 페이지 */
+
+h1.page_title{
+  padding: 150px 0;
+  text-align: center;
+  font-size: 3rem;
+  background-color: #1b1b18;
+}
+
+.double_section .wrap{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+.placerank,
+.placerank .container,
+.foodrank,
+.foodrank .container{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.placerank .item,
+.foodrank .item{
+  height: 60px;
+  padding: 0 20px;
+  background-color: #1b1b18;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.placerank .item h2,
+.foodrank .item h2{
+  line-height: 1;
+}
+
+.placerank .item h2 span,
+.foodrank .item h2 span{
+  color: #fff3;
+  margin-right: 20px;
+}
+
+.placerank .item:nth-child(1) span,
+.foodrank .item:nth-child(1) span{
+  color: gold;
+}
+.placerank .item:nth-child(2) span,
+.foodrank .item:nth-child(2) span{
+  color: silver;
+}
+.placerank .item:nth-child(3) span,
+.foodrank .item:nth-child(3) span{
+  color: chocolate;
+}
+
+/* 명소 페이지 */
+
+.attraction2,
+.special{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.attraction2 .container,
+.special .container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.attraction2 .item,
+.special .item{
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: .2s;
+}
+
+.attraction2 .item img,
+.special .item img{
+  height: 300px;
+}
+
+.attraction2 .item .text_box,
+.special .item .text_box{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding: 20px;
+  background-color: #1b1b18;
+}
+
+.attraction2 .item .text_box .top h3,
+.special .item .text_box .top h3{
+  font-size: 1.4rem;
+}
+
+.attraction2 .item .text_box .top i,
+.special .item .text_box .top i{
+  color: orange;
+  margin-right: .2rem;
+}
+
+.attraction2 .item .text_box .bottom p,
+.special .item .text_box .bottom p{
+  font-size: 15px;
+  color: gray;
+  font-family: "Miscrosoft Phangspa";
+}
+
+.attraction2 .item:hover,
+.special .item:hover{
+  rotate: -3deg;
+}
+
+/* 인풋 */
+
+.input_box{
+  min-height: 40px;
+  background-color: #0005;
+  padding: 0 20px;
+  position: relative;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+}
+
+.input_box label{
+  padding-right: 20px;
+  border-right: 1px solid #fff9;
+  margin-right: 20px;
+}
+
+.input_box input,
+.input_box select{
+  width: 100%;
+  background-color: transparent;
+  color: white;
+  font-size: initial;
+  border: none;
+}
+
+.input_box select{
+  padding-right: 10px;
+}
+
+.input_box input:focus,
+.input_box select:focus{
+  outline: none;
+}
+
+option{
+  background-color: #161612;
+}
