@@ -625,12 +625,19 @@ h1.page_title{
 
 /* 인풋 */
 
+.inputs{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .input_box{
   min-height: 40px;
   background-color: #0005;
   padding: 0 20px;
   position: relative;
   z-index: 10;
+  border-radius: 5px;
   display: inline-flex;
   align-items: center;
 }
@@ -639,10 +646,12 @@ h1.page_title{
   padding-right: 20px;
   border-right: 1px solid #fff9;
   margin-right: 20px;
+  white-space: nowrap;
 }
 
 .input_box input,
-.input_box select{
+.input_box select,
+.input_box textarea{
   width: 100%;
   background-color: transparent;
   color: white;
@@ -650,15 +659,121 @@ h1.page_title{
   border: none;
 }
 
+.input_box.textarea{
+  height: 500px;
+}
+
+.input_box.textarea label{
+  height: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input_box textarea{
+  padding: 10px;
+  height: 500px;
+  resize: none;
+}
+
 .input_box select{
   padding-right: 10px;
 }
 
 .input_box input:focus,
+.input_box textarea:focus,
 .input_box select:focus{
   outline: none;
 }
 
 option{
   background-color: #161612;
+}
+
+#sql{
+  word-spacing: 6px;
+}
+
+/* 메뉴얼 */
+
+.menual{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.menual label{
+  min-width: 124px;
+  text-align: center;
+}
+
+.menual .right{
+  gap: 1rem;
+}
+
+.menual .right > *{
+  padding: 40px;
+  background-color: #0005;
+  border-radius: 5px;
+}
+
+.menual .right .pre_box{
+  width: 632px;
+  height: 100%;
+}
+
+.menual .right p{
+  word-spacing: 5px;
+  line-height: 1.5;
+}
+
+.menual .right pre{
+  height: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  word-spacing: 5px;
+}
+
+/* 모달 */
+
+.modal{
+  width: 100%;
+  height: 100vh;
+  background-color: #0003;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9099999;
+}
+
+.modal.open{
+  display: flex;
+}
+
+.modal > div{
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #1b1b1b;
+}
+
+.modal > div .top{
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.modal > div .main{
+  padding: 40px;
+}
+
+.modal > div > .btn_box{
+  gap: 0;
+
+}
+
+.modal > div > .btn_box .btn{
+  border-radius: 0;
+  height: 60px;
 }
