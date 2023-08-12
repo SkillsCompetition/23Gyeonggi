@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/resources/js/jquery.js"></script>
+  <script src="/resources/js/script.js"></script>
+  <link rel="stylesheet" href="resources/icons/fontawesome-free-6.4.0-web/css/all.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+</head>
+<body>                    
+
+  <input type="checkbox" name="menu" id="menu" hidden>
+  <label for="menu" class="menu_btn"><i class="fa fa-bars"></i></label>
+  <div class="menu_nav">
+    <label for="menu"></label>
+    <div class="side_box col-flex jcsb">
+      <div class="top col-flex aife">
+        <label for="menu" class="close"><i class="fa fa-times"></i></label>
+        <div class="menu">
+          <a href="index.html" class="depth1">천안명물명소</a>
+          <a href="ranking.html" class="depth1">랭킹</a>
+          <div class="depth_box">
+            <a href="#" class="depth1">정보</a>
+            <div class="submenu">
+              <a href="special.html" class="depth2">명물</a>
+              <a href="attraction.html" class="depth2">명소</a>
+            </div>
+          </div>
+          <div class="depth_box">
+            <a href="#" class="depth1">API</a>
+            <div class="submenu">
+              <a href="menual.html" class="depth2">매뉴얼</a>
+              <a href="application.html" class="depth2">발급</a>
+              <a href="#" class="depth2">관리자</a>
+            </div>
+          </div>
+          <a href="#" class="depth1">로그인</a>
+          <a href="#" class="depth1">회원가입</a>
+        </div>
+      </div>
+
+      <div class="bottom col-flex">
+        <div class="sns_box flex">
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-twitter"></i>
+        </div>
+        <div class="flex jcsb aic">
+          <p>(31162) 충남 천안시 서북구 번영로 156</p>
+          <p>031-1234-4321</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="root">
+
+    <h1 class="page_title">API키 발급 페이지</h1>
+    
+    <!-- 콘텐츠 -->
+    <div class="content">
+
+      <div class="application_section">
+        <div class="wrap">
+          <div class="title">
+            <h1>발급</h1>
+            <div class="line"></div>
+            <p>API키를 발급 받으세요.</p>
+          </div>
+
+          <div class="application">
+            <div class="inputs">
+              <div class="input_box apikey_input">
+                <label for="application_key">발급된 API키</label>
+                <input type="text" name="application_key" id="application_key" placeholder="발급 후 확인해주세요." readonly>
+              </div>
+              
+              <div class="input_box">
+                <label for="app_name">어플이름</label>
+                <input type="text" name="app_name" id="app_name">
+              </div>
+              <div class="input_box">
+                <label for="app_url">어플URL</label>
+                <input type="text" name="app_url" id="app_url">
+              </div>
+              <div class="input_box textarea">
+                <label for="description">어플개요</label>
+                <textarea name="description" id="description"></textarea>
+              </div>
+              <div class="btn" onclick="Query.applicationKey()">API키 발급</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  
+    <footer class="main">
+      <div class="wrap col-flex">
+        <div class="flex jcsb aic">
+          <div class="footer_menu flex">
+            <a href="#">개인정보처리방침</a>
+            <a href="#">고객센터</a>
+            <a href="#">회사소개</a>
+          </div>
+
+          <div class="sns_box flex">
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-twitter"></i>
+          </div>
+        </div>
+        <div class="flex jcsb aic">
+          <p>(31162) 충남 천안시 서북구 번영로 156</p>
+          <p>Copyrightⓒ Cheonan-Si. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <div class="modal"></div>
+  
+</body>
+</html>

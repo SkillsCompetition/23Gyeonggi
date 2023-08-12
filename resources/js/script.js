@@ -1,10 +1,14 @@
 const dd = console.log;
 
+const ls = localStorage;
+
 const App = {
 
   init(){
     if(location.pathname == "/") Map.init();
     if(location.pathname.includes("menual")) Query.init();
+    if(location.pathname.includes("game")) Game.init();
+    if(location.pathname.includes("ranking")) Rank.init();
   },
 
   hook(){
@@ -117,7 +121,7 @@ const Query = {
 
     if(Query.API_KEY){
       $("#api_key")
-        .val("*".repeat(Query.API_KEY.length))
+        .val("*****")
         .prop("disabled", true);
 
       $(".modal .btn.toggle").toggle();
@@ -130,7 +134,7 @@ const Query = {
       Query.API_KEY = $("#api_key").val()
 
       $("#api_key")
-        .val("*".repeat(Query.API_KEY.length))
+        .val("*****")
         .prop("disabled", true)
 
         $(".modal .btn.toggle").toggle();
@@ -218,11 +222,225 @@ const Query = {
     }
   },
 
+  applicationKey(){
+    const inputs = $(".application input:not(#application_key)").toArray();
+    if(inputs.some(v => v.value.trim() == "")) return alert("모든 값을 입력해주세요.");
+
+    const key = ((Math.random()*200000000 + new Date().getTime())**2).toString(16).slice(0, 15);
+    $("#application_key").val(key);
+  },
+
   loadKeys(){
     $.getJSON("/resources/json/key.json")
       .then(res => {
         Query.keys = res;
       })
+  }
+
+}
+
+const Game = {
+  data : [],
+  totalRound : Infinity,
+  nowRound : Infinity,
+  gameType : null,
+
+  async init(){
+    Game.gameType = location.hash.replace("#", "");
+    await Game.loadData();
+
+    if(ls["game"] && confirm("이어하시겠습니까?")){
+      Game.load();
+    }else{
+      ls["game"] = "";
+      Modal.open("game");
+    }
+  },
+
+  start(){
+    const round = Number($("#round").val());
+    Game.nowRound = round;
+
+    Game.prevData = [...Game.data].map((v, i) => i).sort(() => Math.random() - 0.5).slice(0, round);
+    Game.nextData = [];
+
+    Modal.close();
+    Game.next();
+  },
+
+  next(){
+    const now = Game.prevData.splice(0, 2)
+
+    Game.setItem(now);
+  },
+
+  setItem(data){
+    $(".game_section .container").html(data.map(v => {
+      return `
+        <div class="item" onclick="Game.select(this, ${v})">
+          <img src="${Game.data[v].image}" alt="">
+          <h1>${Game.data[v].name}</h1>
+        </div>
+      `
+    }));
+  },
+
+  select(target, idx){
+    Game.nextData.push(idx);
+
+    $(".game_section .item").css({
+      "pointer-events" : "none"
+    }).animate({
+      "opacity" : 0
+    }, 500);
+
+    Game.save();
+
+    $(target).stop();
+    if(Game.prevData.length <= 0){
+      setTimeout(Game.changeRound, 1000);
+    }else{
+      setTimeout(Game.next, 1000);
+    }
+  },
+
+  changeRound(){
+    Game.prevData = [...Game.nextData];
+    Game.nextData = [];
+
+    Game.nowRound /= 2;
+
+    if(Game.nowRound == 1){ 
+      Game.showResult();
+    }else{  
+      Modal.open("changeRound");
+      $(".modal .round").html(Game.nowRound == 2 ? "결승" : Game.nowRound);
+
+      setTimeout(() => {
+        Modal.close();
+        Game.next();
+      }, 1500);
+    }
+
+  },
+
+  showResult(){
+    Modal.open("result");
+
+    const data = JSON.parse(ls[Game.gameType]);
+    data[Game.prevData[0]].count++;
+
+    ls[Game.gameType] = JSON.stringify(data);
+    ls["game"] = "";
+
+    $(".result_modal .result").html(`
+      <img src="${Game.data[Game.prevData[0]].image}" alt="">
+      <h1>${Game.data[Game.prevData[0]].name}</h1>
+    `)
+  },
+
+  loadData(){
+    if(!ls["place"]){
+      $.getJSON(`/resources/json/place.json`)
+        .then(v => {
+          ls["place"] = JSON.stringify(v);
+        });
+    }
+
+    if(!ls["food"]){
+      $.getJSON(`/resources/json/food.json`)
+        .then(v => {
+          ls["food"] = JSON.stringify(v);
+        });
+    }
+
+    return $.getJSON(`/resources/json/${Game.gameType}.json`)
+      .then(v => {
+        Game.data = v;
+      });
+  },
+
+  save(){
+    const saveData = {
+      type : Game.type,
+      nowRound : Game.nowRound,
+      prevData : Game.prevData,
+      nextData : Game.nextData
+    }
+
+    ls["game"] = JSON.stringify(saveData);
+  },
+
+  load(){
+    const { type, nowRound, prevData, nextData } = JSON.parse(ls["game"]);
+
+    Game.type = type;
+    Game.nowRound = nowRound;
+    Game.prevData = prevData;
+    Game.nextData = nextData;
+
+    if(prevData.length <= 0) Game.changeRound();
+    else Game.next();
+  }
+
+}
+
+const Rank = {
+  place : [],
+  food : [],
+
+  async init(){
+    await Rank.loadData();
+
+    Rank.settingData();
+  },
+
+  settingData(){
+    Rank.place.sort((a, b) => b.count - a.count);
+    $(".placerank .container").html(Rank.place.slice(0, 10).map((v, i) => {
+      return `
+        <div class="item">
+          <h2><span>${i + 1}위</span>${v.name}</h2>
+          <p>별점 ${v.count}</p>
+        </div>
+      `
+    }))
+
+    Rank.food.sort((a, b) => b.count - a.count);
+    $(".foodrank .container").html(Rank.food.slice(0, 10).map((v, i) => {
+      return `
+        <div class="item">
+          <h2><span>${i + 1}위</span>${v.name}</h2>
+          <p>별점 ${v.count}</p>
+        </div>
+      `
+    }))
+  },
+
+  loadData(){
+    const promise = [];
+
+    if(!ls["place"]){
+      promise.push($.getJSON(`/resources/json/place.json`)
+        .then(v => {
+          ls["place"] = JSON.stringify(v);
+          Rank.place = v;
+        }));
+    }else{
+      Rank.place = JSON.parse(ls["place"]);
+    }
+
+    if(!ls["food"]){
+      promise.push($.getJSON(`/resources/json/food.json`)
+        .then(v => {
+          ls["food"] = JSON.stringify(v);
+          Rank.food = v;
+        }));
+    }else{
+      Rank.food = JSON.parse(ls["food"]);
+    }
+
+    return Promise.all(promise)
   }
 
 }
