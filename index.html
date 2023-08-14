@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/resources/js/jquery.js"></script>
+  <script src="/resources/js/script.js"></script>
   <link rel="stylesheet" href="resources/icons/fontawesome-free-6.4.0-web/css/all.css">
   <link rel="stylesheet" href="style.css">
   <title>Document</title>
@@ -18,7 +20,7 @@
       <div class="top col-flex aife">
         <label for="menu" class="close"><i class="fa fa-times"></i></label>
         <div class="menu">
-          <a href="index.html" class="depth1">천안명물명소</a>
+          <a href="/" class="depth1">천안명물명소</a>
           <a href="ranking.html" class="depth1">랭킹</a>
           <div class="depth_box">
             <a href="#" class="depth1">정보</a>
@@ -30,8 +32,8 @@
           <div class="depth_box">
             <a href="#" class="depth1">API</a>
             <div class="submenu">
-              <a href="#" class="depth2">매뉴얼</a>
-              <a href="#" class="depth2">발급</a>
+              <a href="menual.html" class="depth2">매뉴얼</a>
+              <a href="application.html" class="depth2">발급</a>
               <a href="#" class="depth2">관리자</a>
             </div>
           </div>
@@ -55,23 +57,58 @@
   </div>
 
   <div id="root">
-    <!-- 페럴렉스 -->
-    <div class="parallax attr"></div>
-    <div class="parallax attr"></div>
-  
-    <div class="parallax place type1">
-      <div class="container">
-        <div></div>
-        <div></div>
+
+    <div class="page_top col-flex jcc aic">
+      <div>
+        <img src="resources/img/logo4.png" alt="">
+      </div>
+      <div class="logo">
+        <img src="resources/img/logo1.png" alt="">
+      </div>
+
+      <div class="scroll_down col-flex aic">
+        <p>SCROLL DOWN</p>
+        <i class="fa fa-angle-down"></i>
       </div>
     </div>
-    <div class="parallax place type2">
-      <div class="container">
-        <div></div>
-        <div></div>
-      </div>
+
+    <div class="parallax_text wrap">
+      <h1>
+        <span>다함께</span>
+        <span>즐기는</span>
+        <span>천안</span>
+        <span>시작!</span>
+        <span>각원사</span>
+        <span>독립기념관</span>
+        <span>백화점</span>
+        <span>아라리오</span>
+        <span>갤러리</span>
+        <span>천안종합운동장</span>
+        <span>유관순열사기념관</span>
+        <span>광덕사</span>
+        <span>성불사</span>
+        <span>테딘워터파크</span>
+        <span>우정박물관</span>
+        <span>아름다운정원</span>
+        <span>화수목</span>
+        <span>태학산</span>
+        <span>자연휴양림</span>
+        <span>천안시</span>
+        <span>홍대용과학관</span>
+        <span>천흥사</span>
+        <span>평화의</span>
+        <span>소녀상</span>
+        <span>법왕사</span>
+        <span>아쿠아피아</span>
+        <span>순대</span>
+        <span>호두과자</span>
+      </h1>
     </div>
-  
+
+    <div class="parallax_video wrap">
+      <video src="resources/img/intro.mp4" preload="metadata"></video>
+    </div>
+
     <!-- 콘텐츠 -->
     <div class="content">
   
@@ -86,7 +123,7 @@
   
           <div class="attraction">
             <div class="img_box">
-              <img src="resources/img/attraction/map.png" alt="#" title="#">
+              <canvas id="map" width="640" height="640"></canvas>
             </div>
   
             <div class="info">
