@@ -20,8 +20,6 @@
 }
 
 body{
-  height: 100vh;
-  overflow-x: hidden;
   background-color: #161612;
   color: #fff;
 }
@@ -231,22 +229,6 @@ a{
 
 .title p{
   font-family: "Microsoft Phangspa";
-}
-
-/* 패럴렉스 */
-
-#root{
-  width: 100vw;
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  perspective: 8px;
-  perspective-origin: 0%;
-}
-
-.parallax{
-  position: absolute;
-  padding: 0;
 }
 
 /* 명소 */
@@ -851,4 +833,55 @@ option{
   width: 400px;
   height: 200px;
   border-radius: 5px;
+}
+
+/* 메인페이지 2 */
+
+#root > .page_top{
+  width: 100%;
+  height: 120vh;
+  gap: 5rem;
+  overflow-x: hidden;
+}
+
+#root > .page_top .scroll_down{
+  height: 150px;
+  animation: scroll_down 2s infinite;
+}
+
+@keyframes scroll_down {
+  0%, 100%{gap: .5rem;}
+  50% {gap: 1rem;}
+}
+
+#root > .page_top img{
+  width: 260px;
+}
+
+.parallax_text{
+  max-width: 800px;
+  font-size: 1.8rem;
+  text-shadow: 0 1px #0b0b08;
+  color: #0b0b08;
+}
+
+.parallax_text{
+  line-height: 2;
+}
+
+.parallax_text h1 span{
+  word-break: break-all;
+}
+
+.parallax_video{
+  margin: 600px auto 600px auto;
+  position: relative;
+  height: 500vh;
+}
+
+.parallax_video video{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: .0s;
 }

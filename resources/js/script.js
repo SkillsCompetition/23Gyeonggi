@@ -5,16 +5,96 @@ const ls = localStorage;
 const App = {
 
   init(){
-    if(location.pathname == "/") Map.init();
+    if(location.pathname == "/") {
+      Map.init();
+      Parallax.init();
+    };
     if(location.pathname.includes("menual")) Query.init();
     if(location.pathname.includes("game")) Game.init();
     if(location.pathname.includes("ranking")) Rank.init();
   },
 
+}
+
+const Parallax = {
+
+  init(){
+    Parallax.hook();
+  },
+
   hook(){
+    $(document)
+      .on("scroll", Parallax.scroll)
+  },
 
+  scroll(){
+    const nowY =  window.scrollY + window.innerHeight/2;
+    
+    Parallax.showText(nowY);
+    Parallax.playVideo(nowY);
+
+    Parallax.other(".page_top div:nth-child(1) img", "left");
+    Parallax.other(".page_top div:nth-child(2) img", "right");
+    Parallax.other(".page_top .scroll_down", "left");
+  },
+
+  showText(y){
+    const offsetY = $(".parallax_text").offset().top;
+    const height = $(".parallax_text").innerHeight();
+
+    const count = $(".parallax_text span").length;
+    const per = (y - offsetY)/height
+
+    if(y > offsetY - 100 && y < offsetY + height + 200){
+      let idx = Math.floor(count * per);
+      idx = idx > 27 ? 27 : idx < 0 ? 0 : idx;
+
+      $(".parallax_text span").css({
+        color : "#0b0b08"
+      })
+
+      $(".parallax_text span").eq(idx).css({
+        color : "#fff"
+      })
+    }
+  },
+
+  playVideo(y){
+    const offsetY = $(".parallax_video").offset().top;
+    const height = $(".parallax_video").innerHeight();
+
+    const target = $(".parallax_video video");
+    const duration = target[0].duration;
+    const changeY = y - offsetY
+    const per = changeY/height
+
+    if(y > offsetY && y < offsetY + height){
+      $(".parallax_video video").css({
+        position : "fixed",
+        top : `50%`
+      });
+
+      target[0].currentTime = duration * per;
+    }else{
+      $(".parallax_video video").css({
+        position : "absolute",
+        top : `${changeY > height ? height : changeY < 0 ? 0 : changeY}px`
+      });
+    }
+  },
+
+  other(target, targetType){
+    const scale =  window.scrollY * 2;
+    const type = {
+      top : `translateY(-${scale}px)`,
+      left : `translateX(-${scale}px)`,
+      right : `translateX(${scale}px)`
+    }
+
+    $(target).css({
+      "transform" : type[targetType]
+    });
   }
-
 }
 
 const Map = {
@@ -159,7 +239,7 @@ const Query = {
     const changeSubQuery = subQeury?.map(query => {
       const splitQuery = query.split(/(?=FROM|WHERE|GROUP BY|ORDER BY)/);
       return Query.sortingQuery(splitQuery, 1, "\n ");
-    })
+    }) || [];
 
     const complete = changeSubQuery.reduce((acc, v) => {
       const len = acc.match(/.*(?=\(sub\))/)[0].length;
@@ -175,6 +255,10 @@ const Query = {
 
       if(v.includes("SELECT")) {
         str = str.replaceAll(/\s,\s|,\s|\s,|,/g, ",\n".padEnd(9 + count, " "))
+      };
+
+      if(v.includes("FROM")) {
+        str = str.replaceAll(/\s,\s|,\s|\s,|,/g, ",\n".padEnd(8 + count, " "))
       };
 
       if(v.includes("AND") || v.includes("OR")){
