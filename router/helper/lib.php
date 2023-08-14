@@ -30,7 +30,7 @@
   }
 
   function err($err, $msg = false, $url = "back"){
-    if($err) move($msg, $back);
+    if($err) move($msg, $url);
   }
 
   function emp_vali($chk){

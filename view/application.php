@@ -12,28 +12,28 @@
             <p>API키를 발급 받으세요.</p>
           </div>
 
-          <div class="application">
+          <form action="/application" method="POST" class="application">
             <div class="inputs">
               <div class="input_box apikey_input">
                 <label for="application_key">발급된 API키</label>
-                <input type="text" name="application_key" id="application_key" placeholder="발급 후 확인해주세요." readonly>
+                <input type="text" name="application_key" id="application_key" placeholder="발급 후 확인해주세요." value="<?= @$key["api_key"] ?>" readonly disabled>
               </div>
               
               <div class="input_box">
-                <label for="app_name">어플이름</label>
-                <input type="text" name="app_name" id="app_name">
+                <label for="name">어플이름</label>
+                <input type="text" name="name" id="name">
               </div>
               <div class="input_box">
-                <label for="app_url">어플URL</label>
-                <input type="text" name="app_url" id="app_url">
+                <label for="url">어플URL</label>
+                <input type="text" name="url" id="url">
               </div>
               <div class="input_box textarea">
                 <label for="description">어플개요</label>
                 <textarea name="description" id="description"></textarea>
               </div>
-              <div class="btn" onclick="Query.applicationKey()">API키 발급</div>
+              <button class="btn">API키 발급</button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
 

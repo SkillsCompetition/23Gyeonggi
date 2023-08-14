@@ -37,8 +37,14 @@
               <a href="#" class="depth2">관리자</a>
             </div>
           </div>
-          <a href="/login" class="depth1">로그인</a>
-          <a href="/join" class="depth1">회원가입</a>
+
+          <?php if(@USER): ?>
+            <p class="depth1"><?= USER["username"] ?>님</p>
+            <a href="/logout" class="depth1">로그아웃</a>
+          <?php else: ?>
+            <a href="/login" class="depth1">로그인</a>
+            <a href="/join" class="depth1">회원가입</a>
+          <?php endif ?>
         </div>
       </div>
 

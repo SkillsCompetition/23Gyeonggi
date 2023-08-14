@@ -306,14 +306,6 @@ const Query = {
     }
   },
 
-  applicationKey(){
-    const inputs = $(".application input:not(#application_key)").toArray();
-    if(inputs.some(v => v.value.trim() == "")) return alert("모든 값을 입력해주세요.");
-
-    const key = ((Math.random()*200000000 + new Date().getTime())**2).toString(16).slice(0, 15);
-    $("#application_key").val(key);
-  },
-
   loadKeys(){
     $.getJSON("/resources/json/key.json")
       .then(res => {

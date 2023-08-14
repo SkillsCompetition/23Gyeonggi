@@ -1,10 +1,11 @@
-<h1 class="page_title">회원가입</h1>
+<h1 class="page_title">로그인</h1>
 
 <div class="content">
-  <div class="join_section">
+
+  <div class="login_section">
     <div class="wrap">
-      <form action="/join" method="POST" class="join inputs">
-  
+      <form action="/login" method="POST" class="login inputs">
+        
         <div class="input_box">
           <label for="userid">아이디</label>
           <input type="text" name="userid" id="userid">
@@ -14,18 +15,14 @@
           <label for="password">비밀번호</label>
           <input type="password" name="password" id="password">
         </div>
-  
-        <div class="input_box">
-          <label for="username">이름</label>
-          <input type="text" name="username" id="username">
-        </div>
-  
+
         <div class="btn_box full">
-          <a class="btn" href="/login">로그인</a>
-          <button class="btn">회원가입</button>
+          <a class="btn" href="/join">회원가입</a>
+          <button class="btn">로그인</button>
         </div>
-  
+
       </form>
     </div>
   </div>
+
 </div>

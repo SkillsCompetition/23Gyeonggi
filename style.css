@@ -65,6 +65,7 @@ a{
   cursor: pointer;
   font-weight: bold;
   gap: .5rem;
+  border: none;
 }
 
 .btn_box{
@@ -887,3 +888,22 @@ option{
 }
 
 /* 회원가입 */
+
+.login_section{
+  padding: 150px 0 !important;
+}
+
+.join_section{
+  padding: 120px 0 !important;
+}
+
+.login_section .wrap,
+.join_section .wrap{
+  max-width: 400px;
+}
+
+.login label,
+.join label{
+  text-align: center;
+  min-width: 76px;
+}

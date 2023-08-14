@@ -52,4 +52,5 @@
   }
 
   class user extends DB {}
+  class application extends DB {}
 ?>
