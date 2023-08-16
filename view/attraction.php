@@ -17,91 +17,21 @@
                 <div class="input_box">
                   <label for="filter">검색필터</label>
                   <select name="filter" id="filter">
-                    <option value="location">행정구역</option>
                     <option value="name">이름</option>
-                    <option value="address">주소</option>
+                    <option value="addr">주소</option>
                   </select>
                 </div>
-                <div class="btn">검색</div>
+
+                <div class="input_box">
+                  <label for="search">검색어</label>
+                  <input type="text" id="search">
+                </div>
+                
+                <div class="btn" onclick="search()">검색</div>
               </div>
             </div>
 
             <div class="container">
-
-              <div class="item">
-                <img src="resources/img/attraction/sub/1.jpg" alt="#" title="#">
-                <div class="text_box">
-                  <div class="top flex jcsb aic">
-                    <h2>각원사</h2>
-                    <p><i class="fa fa-star"></i> 4.0</p>
-                  </div>
-
-                  <div class="bottom flex jcsb aic">
-                    <p>충청남도 천안 San 98-83</p>
-                    <p>041-564-4352</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="item">
-                <img src="resources/img/attraction/sub/2.jpg" alt="#" title="#">
-                <div class="text_box">
-                  <div class="top flex jcsb aic">
-                    <h2>독립기념관</h2>
-                    <p><i class="fa fa-star"></i> 4.3</p>
-                  </div>
-
-                  <div class="bottom flex jcsb aic">
-                    <p>충청남도 천안 동남구 목천읍 삼방로 95</p>
-                    <p>041-232-1558</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="item">
-                <img src="resources/img/attraction/sub/3.jpg" alt="#" title="#">
-                <div class="text_box">
-                  <div class="top flex jcsb aic">
-                    <h2>신세계백화점 충청점</h2>
-                    <p><i class="fa fa-star"></i> 4.0</p>
-                  </div>
-
-                  <div class="bottom flex jcsb aic">
-                    <p>충청남도 천안 동남구 만남로 43</p>
-                    <p>041-555-5446</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="item">
-                <img src="resources/img/attraction/sub/4.jpg" alt="#" title="#">
-                <div class="text_box">
-                  <div class="top flex jcsb aic">
-                    <h2>아라리오 갤러리</h2>
-                    <p><i class="fa fa-star"></i> 3.8</p>
-                  </div>
-
-                  <div class="bottom flex jcsb aic">
-                    <p>충청남도 천안 동남구 만남로 43</p>
-                    <p>041-567-8654</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="item">
-                <img src="resources/img/attraction/sub/5.jpg" alt="#" title="#">
-                <div class="text_box">
-                  <div class="top flex jcsb aic">
-                    <h2>천안종합운동장</h2>
-                    <p><i class="fa fa-star"></i> 3.5</p>
-                  </div>
-
-                  <div class="bottom flex jcsb aic">
-                    <p>충청남도 천안시 서북구 번영로 208</p>
-                    <p>041-558-3426</p>
-                  </div>
-                </div>
-              </div>
 
               <div class="item">
                 <img src="resources/img/attraction/sub/6.jpg" alt="#" title="#">
@@ -124,3 +54,40 @@
       </div>
 
     </div>
+
+
+    <script>
+
+      const initData = <?= json_encode($data)?>;
+
+      setContainer(initData);
+      function setContainer(data){
+        $(".attraction2 .container").html(data.map(v => {
+          return `
+            <div class="item">
+              <img src="${v.image}" alt="#" title="#">
+              <div class="text_box">
+                <div class="top flex jcsb aic">
+                  <h2>${v.name}</h2>
+                  <p><i class="fa fa-star"></i> ${v.score}</p>
+                </div>
+
+                <div class="bottom flex jcsb aic">
+                  <p>${v.addr}</p>
+                  <p>${v.phone}</p>
+                </div>
+              </div>
+            </div>
+          `
+        }))
+      }
+
+      function search(){
+        const key = $("#filter").val();
+        const keyword = $("#search").val();
+
+        const data = initData.filter(v => v[key].includes(keyword));
+        setContainer(data);
+      }
+
+    </script>

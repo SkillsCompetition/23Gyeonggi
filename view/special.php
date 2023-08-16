@@ -17,107 +17,21 @@
                 <div class="input_box">
                   <label for="filter">검색필터</label>
                   <select name="filter" id="filter">
-                    <option value="location">행정구역</option>
                     <option value="name">이름</option>
-                    <option value="address">주소</option>
+                    <option value="addr">주소</option>
                   </select>
                 </div>
-                <div class="btn">검색</div>
+
+                <div class="input_box">
+                  <label for="search">검색어</label>
+                  <input type="text" id="search">
+                </div>
+                
+                <div class="btn" onclick="search()">검색</div>
               </div>
             </div>
 
             <div class="container">
-
-              <div class="item">
-                <img src="resources/img/special/1.jpg" alt="#" title="#">
-                <div class="text_box">
-                  <div class="top flex jcsb aic">
-                    <h2>청화집</h2>
-                    <p><i class="fa fa-star"></i> 4.3</p>
-                  </div>
-
-                  <div class="bottom flex jcsb aic">
-                    <p>충청남도 천안시 동남구 병천면 충절로 1749</p>
-                    <p>041-564-1558</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="item">
-                <img src="resources/img/special/2.jpg" alt="#" title="#">
-                <div class="text_box">
-                  <div class="top flex jcsb aic">
-                    <h2>동순원</h2>
-                    <p><i class="fa fa-star"></i> 4.3</p>
-                  </div>
-
-                  <div class="bottom flex jcsb aic">
-                    <p>충청남도 천안시 서북구 성환읍</p>
-                    <p>041-564-1558</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="item">
-                <img src="resources/img/special/3.jpg" alt="#" title="#">
-                <div class="text_box">
-                  <div class="top flex jcsb aic">
-                    <h2>장칼국수</h2>
-                    <p><i class="fa fa-star"></i> 4.2</p>
-                  </div>
-
-                  <div class="bottom flex jcsb aic">
-                    <p>충청남도 천안시 동남구 천안천8길 49</p>
-                    <p>041-555-3567</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="item">
-                <img src="resources/img/special/4.jpg" alt="#" title="#">
-                <div class="text_box">
-                  <div class="top flex jcsb aic">
-                    <h2>이고집만두</h2>
-                    <p><i class="fa fa-star"></i> 4.0</p>
-                  </div>
-
-                  <div class="bottom flex jcsb aic">
-                    <p>충청남도 천안시 동남구 태조산길 258</p>
-                    <p>041-567-2027</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="item">
-                <img src="resources/img/special/5.jpg" alt="#" title="#">
-                <div class="text_box">
-                  <div class="top flex jcsb aic">
-                    <h2>일이이사</h2>
-                    <p><i class="fa fa-star"></i> 4.0</p>
-                  </div>
-
-                  <div class="bottom flex jcsb aic">
-                    <p>충청남도 천안시 서북구 불당28길 10</p>
-                    <p>041-558-1224</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="item">
-                <img src="resources/img/special/6.jpg" alt="#" title="#">
-                <div class="text_box">
-                  <div class="top flex jcsb aic">
-                    <h2>광명만두</h2>
-                    <p><i class="fa fa-star"></i> 3.9</p>
-                  </div>
-
-                  <div class="bottom flex jcsb aic">
-                    <p>충청남도 천안시 서북구 두정중4길 1</p>
-                    <p>041-552-2289</p>
-                  </div>
-                </div>
-              </div>
-
 
             </div>
           </div>
@@ -125,3 +39,39 @@
       </div>
 
     </div>
+
+    <script>
+
+      const initData = <?= json_encode($data)?>;
+
+      setContainer(initData);
+      function setContainer(data){
+        $(".special .container").html(data.map(v => {
+          return `
+            <div class="item">
+              <img src="${v.image}" alt="#" title="#">
+              <div class="text_box">
+                <div class="top flex jcsb aic">
+                  <h2>${v.name}</h2>
+                  <p><i class="fa fa-star"></i> ${v.score}</p>
+                </div>
+
+                <div class="bottom flex jcsb aic">
+                  <p>${v.addr}</p>
+                  <p>${v.phone}</p>
+                </div>
+              </div>
+            </div>
+          `
+        }))
+      }
+
+      function search(){
+        const key = $("#filter").val();
+        const keyword = $("#search").val();
+
+        const data = initData.filter(v => v[key].includes(keyword));
+        setContainer(data);
+      }
+
+    </script>

@@ -556,7 +556,7 @@ h1.page_title{
 .attraction2 .container,
 .special .container{
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
@@ -615,6 +615,7 @@ h1.page_title{
 }
 
 .input_box{
+  width: 100%;
   min-height: 40px;
   background-color: #0005;
   padding: 0 20px;
@@ -906,4 +907,39 @@ option{
 .join label{
   text-align: center;
   min-width: 76px;
+}
+
+/* 테이블 */
+
+table{
+  width: 100%;
+  border-spacing: 3px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+
+th,
+td{
+  height: 45px;
+  padding: 0 20px;
+  white-space: normal;
+  text-align: center; 
+  background-color: #0005;
+}
+
+/* admin */
+
+.admin_modal{
+  width: 900px;
+}
+
+input[type="checkbox"]{
+  width: 17px;
+  height: 17px;
+  accent-color: #ffb700;
+}
+
+.admin{
+  gap: 1rem;
 }

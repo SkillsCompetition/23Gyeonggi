@@ -8,4 +8,8 @@
     err(!USER, "로그인 후 접근해주세요.", "/");
   }
 
+  function admin(){
+    err(@USER["userid"] != "admin", "관리자만 접근 가능합니다.", "/");
+  }
+
 ?>

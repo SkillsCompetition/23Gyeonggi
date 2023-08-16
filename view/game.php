@@ -116,7 +116,7 @@
         </div>
       </div>
       <div class="btn_box full">
-        <div class="btn" onclick="location.href='ranking.html'">전체 결과보기</div>
+        <div class="btn" onclick="location.href='/ranking'">전체 결과보기</div>
         <div class="btn" onclick="Modal.open('game')">다시하기</div>
       </div>
     </div>

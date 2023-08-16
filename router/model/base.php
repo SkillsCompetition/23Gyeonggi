@@ -46,11 +46,16 @@
 
       $update = implode(" = ?, ", array_keys($data))." = ?";
 
-      self::mq("UPDATE $table SET $update WHERE $sql", [...array_values($data), $con]);
+      $con = is_array($con) ? $con : [$con];
+
+      self::mq("UPDATE $table SET $update WHERE $sql", [...array_values($data), ...$con]);
     }
     
   }
 
   class user extends DB {}
   class application extends DB {}
+  class permission extends DB {}
+  class place extends DB {}
+  class food extends DB {}
 ?>

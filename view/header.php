@@ -34,7 +34,7 @@
             <div class="submenu">
               <a href="/menual" class="depth2">매뉴얼</a>
               <a href="/application" class="depth2">발급</a>
-              <a href="#" class="depth2">관리자</a>
+              <a href="/api_admin" class="depth2">관리자</a>
             </div>
           </div>
 

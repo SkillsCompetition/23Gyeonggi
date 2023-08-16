@@ -11,7 +11,6 @@ const App = {
     };
     if(location.pathname.includes("menual")) Query.init();
     if(location.pathname.includes("game")) Game.init();
-    if(location.pathname.includes("ranking")) Rank.init();
   },
 
 }
@@ -296,14 +295,10 @@ const Query = {
     $(".menual .right span")
       .html(`/api/place/${data.sql}/${data.page}/${data.perPage}/${Query.API_KEY}`)
 
-    if(!Query.keys.includes(Query.API_KEY)){
-      $(".menual pre").html(`{\n\t"message" : "API키가 올바르지 않습니다."\n}`);
-    }else{
-      $.getJSON("/resources/json/place.json")
-        .then(res => {
-          $(".menual pre").html(JSON.stringify(res, null, 4));
-        })
-    }
+    $.getJSON(`/api/place/${data.sql}/${data.page}/${data.perPage}/${Query.API_KEY}`)
+      .then(res => {
+        $(".menual pre").html(JSON.stringify(res, null, 4));
+      })
   },
 
   loadKeys(){
@@ -403,10 +398,8 @@ const Game = {
   showResult(){
     Modal.open("result");
 
-    const data = JSON.parse(ls[Game.gameType]);
-    data[Game.prevData[0]].count++;
+    $.post("/rank", { table : Game.gameType, idx : Game.data[Game.prevData[0]].idx });
 
-    ls[Game.gameType] = JSON.stringify(data);
     ls["game"] = "";
 
     $(".result_modal .result").html(`
@@ -416,21 +409,7 @@ const Game = {
   },
 
   loadData(){
-    if(!ls["place"]){
-      $.getJSON(`/resources/json/place.json`)
-        .then(v => {
-          ls["place"] = JSON.stringify(v);
-        });
-    }
-
-    if(!ls["food"]){
-      $.getJSON(`/resources/json/food.json`)
-        .then(v => {
-          ls["food"] = JSON.stringify(v);
-        });
-    }
-
-    return $.getJSON(`/resources/json/${Game.gameType}.json`)
+    return $.getJSON(`/game_data/${Game.gameType}`)
       .then(v => {
         Game.data = v;
       });
@@ -457,66 +436,6 @@ const Game = {
 
     if(prevData.length <= 0) Game.changeRound();
     else Game.next();
-  }
-
-}
-
-const Rank = {
-  place : [],
-  food : [],
-
-  async init(){
-    await Rank.loadData();
-
-    Rank.settingData();
-  },
-
-  settingData(){
-    Rank.place.sort((a, b) => b.count - a.count);
-    $(".placerank .container").html(Rank.place.slice(0, 10).map((v, i) => {
-      return `
-        <div class="item">
-          <h2><span>${i + 1}위</span>${v.name}</h2>
-          <p>별점 ${v.count}</p>
-        </div>
-      `
-    }))
-
-    Rank.food.sort((a, b) => b.count - a.count);
-    $(".foodrank .container").html(Rank.food.slice(0, 10).map((v, i) => {
-      return `
-        <div class="item">
-          <h2><span>${i + 1}위</span>${v.name}</h2>
-          <p>별점 ${v.count}</p>
-        </div>
-      `
-    }))
-  },
-
-  loadData(){
-    const promise = [];
-
-    if(!ls["place"]){
-      promise.push($.getJSON(`/resources/json/place.json`)
-        .then(v => {
-          ls["place"] = JSON.stringify(v);
-          Rank.place = v;
-        }));
-    }else{
-      Rank.place = JSON.parse(ls["place"]);
-    }
-
-    if(!ls["food"]){
-      promise.push($.getJSON(`/resources/json/food.json`)
-        .then(v => {
-          ls["food"] = JSON.stringify(v);
-          Rank.food = v;
-        }));
-    }else{
-      Rank.food = JSON.parse(ls["food"]);
-    }
-
-    return Promise.all(promise)
   }
 
 }
